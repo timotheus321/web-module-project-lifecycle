@@ -5,9 +5,23 @@ import Todo from './Todo';
   render() {
     return (
       <div>
-        {this.props.todos.map(todo => (
-          <Todo key={todo.id} todo={todo}  />
-        ))}
+      <div id="todos"></div>
+        <h2>Todos:</h2>
+        {
+          this.props.todos.reduce((acc, td) => {
+            if (this.state.displayCompleted || !td.completed) return acc.concat(
+              <Todo
+                key ={td.id}
+                toggleCompleted={this.props.toggleCompleted}
+                todo={td}
+              />
+            )
+              return acc
+          }, [])
+            
+            
+          
+        }
       </div>
     );
   }
