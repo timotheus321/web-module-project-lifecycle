@@ -20,9 +20,11 @@ export default class App extends React.Component {
   setAxiosResponseError = err => this.setState({...this.state, error: err.response.data.message })
   
   PostNewTodo = () => {
+    console.log('posting new todo with name:', this.state.todoNameInput);
     axios.post(URL, { name: this.state.todoNameInput})
     .then( res => {
-      this.setState({...this.state, todos: this.state.todos.concat() })
+      console.log('Response from server:', res.data);
+      this.setState({...this.state, todos: this.state.todos.concat(res.data.data) })
       this.resetForm()
     })
     .catch(this.setAxiosResponseError)
@@ -64,12 +66,12 @@ export default class App extends React.Component {
         <div id="Error:"> {this.state.error}</div>
         <TodoList
           todos={this.state.todos}
-          displayCompleted={this.state.displayCompleted}
+          displayCompleted={this.state.displayCompleted || false}
           toggleCompleted={this.toggleCompleted}
         />
         <Form
           onFormsubmit={this.onFormsubmit}
-          todoNameInput={this.todoNameInput}
+          todoNameInput={this.state.todoNameInput}
           onChangeHandler={this.onChangeHandler}
           toggleDisplayCompleted={this.toggleDisplayCompleted}
           displayCompleted={this.state.displayCompleted}

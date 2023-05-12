@@ -6,7 +6,7 @@ export default class Form extends React.Component {
   render() {
     return (
       <>
-       <form id="todoForm" onSubmit={this.props.onFormSubmit}>
+       <form id="todoForm" onSubmit={this.props.onFormsubmit}>
           <input value={this.props.todoNameInput} 
                   onChange={this.props.onChangeHandler} 
                   type="text"             
